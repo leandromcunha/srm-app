@@ -1,0 +1,70 @@
+<section class="content-header">
+</section>
+
+<section class="content">
+  <section class="invoice">
+    <form #form="ngForm" novalidate>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa"></i>Linha de Crédito
+          </h2>
+        </div>
+      </div>
+
+      <div class="row invoice-info">
+        <div class="col-xs-12">
+          <p class="lead"></p>
+        </div>
+      </div>
+
+
+      <div class="row invoice-info">
+        <div class="col-sm-6 col-xs-12">
+          <srm-input-container errorMessage="Campo obrigatório" label="Cliente">
+            <input class="form-control" name="customer" ngModel required placeholder="Cliente" autocomplete="off">
+          </srm-input-container>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <srm-input-container errorMessage="Campo obrigatório e somente números" label="Crédito">
+            <input type="text" class="form-control" pattern="^[0-9]*$" required name="creditLine" ngModel placeholder="Crédito" autocomplete="off">
+          </srm-input-container>
+        </div>
+      </div>
+
+      <div class="row invoice-info">
+
+        <div class="col-sm-6 col-xs-12">
+          <select name="risk" ngModel class="form-control" placeholder="Risco" autocomplete="off" (change)="onChange( $event.target.value )">
+            <option class="form-control" *ngFor="let r of riskList">{{r.description}}</option>
+          </select>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <srm-input-container label="Taxa">
+            <input type="text" disabled value="{{rate}}" class="form-control" name="rate" ngModel autocomplete="off" placeholder="Taxa">
+          </srm-input-container>
+        </div>
+
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-xs-12">
+          <div *ngIf="response">
+              <p class="text-center">
+                  <b>{{response.message}}</b>
+              </p>
+            </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button (click)="addCreditLine(form.value)" class="btn btn-success pull-right" [disabled]="!form.valid">
+          <i class="fa"></i> Gravar
+        </button>
+      </div>
+    </div>
+  </section>
+</section>

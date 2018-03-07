@@ -1,0 +1,3 @@
+<select name="{{name}}" ngModel class="form-control" (change)="onChange($event.target.value)" >
+  <option  *ngFor="let v of values" >{{ v.description }}</option>
+</select>
